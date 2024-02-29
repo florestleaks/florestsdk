@@ -1,0 +1,32 @@
+{
+  "template": "https://github.com/radix-ai/poetry-cookiecutter",
+  "commit": "4127874124193c60cd5e2bfaa025473b8f30411f",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "package_name": "florestsdk",
+      "package_description": "add",
+      "package_url": "https://github.com/florestleaks/florestsdk",
+      "author_name": "Luiz Gustavo Corrêa Filho",
+      "author_email": "john@example.com",
+      "python_version": "3.11",
+      "docker_image": "python:$PYTHON_VERSION-slim",
+      "development_environment": "strict",
+      "with_conventional_commits": "1",
+      "with_fastapi_api": "1",
+      "with_jupyter_lab": "1",
+      "with_pydantic_typing": "1",
+      "with_sentry_logging": "1",
+      "with_streamlit_app": "0",
+      "with_typer_cli": "1",
+      "continuous_integration": "GitHub",
+      "docstring_style": "NumPy",
+      "private_package_repository_name": "",
+      "private_package_repository_url": "",
+      "__package_name_kebab_case": "florestsdk",
+      "__package_name_snake_case": "florestsdk",
+      "_template": "https://github.com/radix-ai/poetry-cookiecutter"
+    }
+  },
+  "directory": null
+}
