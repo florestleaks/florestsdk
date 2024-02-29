@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       fail-fast: false
@@ -25,12 +25,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 21
+          node-version: 18
 
       - name: Install @devcontainers/cli
-        run: npm install --location=global @devcontainers/cli@0.55.0
+        run: npm install --location=global @devcontainers/cli@0.41.0
 
       - name: Start Dev Container
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           git config --global init.defaultBranch main
           PYTHON_VERSION=${{ matrix.python-version }} devcontainer up --workspace-folder .
@@ -41,7 +43,15 @@ jobs:
       - name: Test package
         run: devcontainer exec --workspace-folder . poe test
 
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
+      # Copiar coverage.xml para o sistema de arquivos do host
+      - name: Copy coverage report from Dev Container to Host
+        run: |
+          CONTAINER_ID=$(docker ps -qf "ancestor=soar_dev") # Substitua IMAGE_NAME pelo nome da imagem do seu Dev Container
+          docker cp "$CONTAINER_ID:/workspaces/soar/reports/coverage.xml" "${GITHUB_WORKSPACE}/coverage.xml"
+
+      # Passo do Codecov ajustado para o novo local do arquivo
+      - uses: codecov/codecov-action@v4
         with:
-          files: reports/coverage.xml
+          fail_ci_if_error: true
+          files: ./coverage.xml  # Este é o arquivo no sistema de arquivos do host
+          token: ${{ secrets.CODECOV_TOKEN }}
