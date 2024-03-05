@@ -1,0 +1,48 @@
+[Notification_Sender]
+    email_setup_manager = [""]
+    email_monitoring = [""]
+
+# Internal config
+[Internal_Database_Connection_Config]
+server = "192.168.1.1"
+ports = [ 8001, 8001, 8002 ]
+connection_max = 5000
+enabled = true
+
+[Internal_Sentry]
+    dsn="https://3578ecb371ebbb03f53e2035ab2c0d4f@sentry.florestleaks.com/5"
+    traces_sample_rate = 1.0
+    profiles_sample_rate = 1.0
+    enable_tracing = true
+[Internal_Database_Table]
+        database_modules_manager = "Modules"
+        database_yara = "YaraRules"
+        client_prefix = "Client_"
+        database_clients = "Clients"
+        database_crawler = "Crawler"
+        collection_crawler_onion_with_credential = "crawler_with_credential_onion"
+        collection_crawler_onion_without_credential = "crawler_without_credential_onion"
+        collection_crawler_web_with_credential = "crawler_with_credential_web"
+        collection_crawler_web_without_credential = "crawler_without_credential_web"
+
+[Internal_Yara]
+    type_rules = ["Vips", "Leak", "Domino", "Incidente", "StringMatch", "POCStringMatch"]
+
+[Internal_Network_Proxy]
+    http = "127.0.0.1:5566"
+    https = "127.0.0.1:5566"
+
+[Internal_GitRepo]
+    client_crawler_monitoring_url = "https://github.com/florestleaks/soar-crawler_monitoring"
+    client_crawler_branch = "main"
+    client_yara_rules_url = "https://github.com/florestleaks/soar-client_monitoring_yara_rules"
+    client_yara_rules_branch = "main"
+    client_monitoring_url = "https://github.com/florestleaks/soar-CLIENT_MONITORING"
+    client_monitoring_branch = "main"
+    user = "WoodlandSecrets"
+    token = ""
+
+
+[Integration_TheHive]
+    url = "http://localhost:9000/api"
+    api_service = "c36zl5H5aGmZywjawSh2mHru+MShkBNK"
